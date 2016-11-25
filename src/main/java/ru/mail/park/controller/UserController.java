@@ -26,7 +26,7 @@ public class UserController {
     }
 
 
-    @RequestMapping(path = "/api/rank", method = RequestMethod.GET)
+    @RequestMapping(path = "/rating", method = RequestMethod.GET)
     public ResponseEntity getRank() {
         return ResponseEntity.ok(new SuccessResponse("me"));
     }

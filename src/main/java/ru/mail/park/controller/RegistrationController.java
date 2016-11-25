@@ -34,8 +34,8 @@ public class RegistrationController {
     }
 
 
-    @RequestMapping(path = "/api/user", method = RequestMethod.POST)
-    public ResponseEntity login(@RequestBody RegistrationRequest body) {
+    @RequestMapping(path = "/signup", method = RequestMethod.POST)
+    public ResponseEntity create(@RequestBody RegistrationRequest body) {
 
         final String username = body.getUsername();
         final String password = body.getPassword();
@@ -67,7 +67,7 @@ public class RegistrationController {
         return ResponseEntity.ok(new SuccessResponse(username));
     }
 
-    @RequestMapping(path = "/api/session", method = RequestMethod.GET)
+    @RequestMapping(path = "/signup", method = RequestMethod.GET)
     public ResponseEntity checkSession(HttpSession httpSession) {
 
         Object attribute = httpSession.getAttribute("username");
@@ -85,13 +85,13 @@ public class RegistrationController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorResponse("Session is invalid"));
     }
 
-    @RequestMapping(path = "/api/session", method = RequestMethod.DELETE)
+    @RequestMapping(path = "/signup", method = RequestMethod.DELETE)
     public ResponseEntity deleteSession(HttpSession httpSession) {
         httpSession.invalidate();
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("{}");
     }
 
-    @RequestMapping(path = "/api/session", method = RequestMethod.POST)
+    @RequestMapping(path = "/signin", method = RequestMethod.POST)
     public ResponseEntity auth(@RequestBody AuthRequest body, HttpSession httpSession) {
 
         final String password = body.getPassword();
