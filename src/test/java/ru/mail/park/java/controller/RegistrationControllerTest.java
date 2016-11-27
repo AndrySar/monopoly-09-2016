@@ -58,7 +58,7 @@ public class RegistrationControllerTest {
         MockHttpSession mockHttpSession = new MockHttpSession();
 
         mockMvc.perform(MockMvcRequestBuilders
-                .post("/api/session")
+                .post("/signin")
                 .session(mockHttpSession)
                 .content(String.format("{\"username\":  \"%s\", \"password\": \"%s\" }", username, password))
                 .contentType(MediaType.APPLICATION_JSON))
@@ -76,7 +76,7 @@ public class RegistrationControllerTest {
         MockHttpSession mockHttpSession = login("andy", "12345");
 
         mockMvc.perform(MockMvcRequestBuilders
-                .get("/api/session")
+                .get("/signup")
                 .session(mockHttpSession)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
@@ -90,7 +90,7 @@ public class RegistrationControllerTest {
         assertEquals("andy", mockHttpSession.getAttribute("username"));
 
         mockMvc.perform(MockMvcRequestBuilders
-                .delete("/api/session")
+                .delete("/signup")
                 .session(mockHttpSession)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
@@ -104,7 +104,7 @@ public class RegistrationControllerTest {
     public void registration() throws Exception{
 
         mockMvc.perform(MockMvcRequestBuilders
-                .post("/api/user")
+                .post("/signup")
                 .content("{\"username\": \"bob\", \"password\": \"12345\"}")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
